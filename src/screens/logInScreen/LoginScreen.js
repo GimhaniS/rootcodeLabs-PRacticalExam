@@ -5,21 +5,27 @@ import { COLORS } from '../../Utils/colors';
 import logo from '../../assets/practical_test_logo.png';
 import fb from '../../assets/fb.png';
 import google from '../../assets/google.png';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogIn } from '../../features/user/userSlice';
 const emailRegex =
   /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
+const intialState = {
+  userName: '',
+  password: '',
+};
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [loading, setLoading] = useState(false);
+  const { token, userId } = useSelector((store) => store.userSlice);
+
   useEffect(() => {
     console.log('Login screen');
   }, []);
-
+  const dispatch = useDispatch();
   //login handler
   const logInHandler = () => {
     //checking whether email is empty ir not
@@ -57,10 +63,10 @@ const LoginScreen = () => {
     setEmailError('');
     setPasswordError('');
     setLoading(false);
-
+    dispatch(userLogIn({ email, password }));
     // return true;
   };
-
+  console.log('token', token, userId);
   return (
     <View style={styles.logInWrapper}>
       <View>

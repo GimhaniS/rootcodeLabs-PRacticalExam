@@ -4,10 +4,16 @@ import album from '../assets/album.jpg';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { COLORS } from '../Utils/colors';
-const RecentlyPlayedItem = ({ songName, artist }) => {
+const RecentlyPlayedItem = ({ songName, artist, album }) => {
   return (
     <View style={styles.headerHome}>
-      <Image source={album} style={styles.albumView} resizeMethod="resize" />
+      <Image
+        source={{
+          uri: album ? album?.toString() : '',
+        }}
+        style={styles.albumView}
+        resizeMethod="resize"
+      />
       <View style={styles.textView}>
         <Text style={styles.song}>{songName}</Text>
         <Text style={styles.name}>{artist}</Text>

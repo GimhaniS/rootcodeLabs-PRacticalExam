@@ -12,9 +12,9 @@ function App(): JSX.Element {
       <SafeAreaProvider>
         <StatusBar barStyle={'light-content'} />
         <SafeAreaView style={styles.container}>
-          {/* <RootNavigator /> */}
           <Provider store={store}>
-            <TabNavigator />
+            <RootNavigator />
+            {/* <TabNavigator /> */}
           </Provider>
         </SafeAreaView>
       </SafeAreaProvider>
